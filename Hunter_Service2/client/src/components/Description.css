@@ -1,0 +1,45 @@
+.size {
+  display: flex;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+
+.describe {
+  max-width: 500px;
+  margin: 0 10px 0 0;
+  font-size: 23px;
+}
+
+.shoppingbuttons {
+  display: flex;
+}
+
+.addcart {
+  height: 50px;
+  width: 375px;
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+  font-size: 18px;
+}
+
+.heart {
+  height: 50px;
+  width: 50px;
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+  font-size: 20px;
+}
+
+.heart:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=100);
+}
+
+.addcart:hover {
+  opacity: 0.5;
+  filter: alpha(opacity=100);
+}
