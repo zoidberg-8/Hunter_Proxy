@@ -2,9 +2,9 @@
   opacity: 0.2;
   height: 45px;
   width: 45px;
-  positionz-index: -1;
+  z-index: 1;
   position: absolute;
-  top: 350px;
+  top: 300px;
   bottom: 0;
   left: 0;
   background-color: white;
@@ -19,10 +19,10 @@
   opacity: 0.2;
   height: 45px;
   width: 45px;
-  positionz-index: -1;
+  z-index: 1;
   position: absolute;
   left: 1150px;
-  top: 350px;
+  top: 300px;
   bottom: 0;
   background-color: white;
   color: black;
@@ -43,6 +43,8 @@
 }
 
 .slideshow {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, "Lucida Grande", sans-serif;
   position: relative;
   width: 1200px;
   margin: 0;
@@ -60,4 +62,9 @@
 
 .buttondiv {
   padding: 3px;
+}
+
+.suggest {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, "Lucida Grande", sans-serif;
 }

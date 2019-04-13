@@ -1,26 +1,17 @@
-DROP DATABASE IF EXISTS nike;
+DROP DATABASE IF EXISTS nike2;
 
-CREATE DATABASE nike;
+CREATE DATABASE nike2;
 
-USE nike;
-
-CREATE TABLE suggestions (
-  id int NOT NULL AUTO_INCREMENT,
-  name varchar(50) NOT NULL,
-  url varchar(10000) NOT NULL,
-  price int(5) NOT NULL,
-  category varchar(50) NOT NULL,
-  colors int(2) NOT NULL,
-  style varchar(50) NOT NULL,
-  PRIMARY KEY (ID)
-);
+USE nike2;
 
 CREATE TABLE description (
   id int NOT NULL AUTO_INCREMENT,
-  description varchar(10000) NOT NULL,
-  benefits varchar(10000) NOT NULL,
+  description varchar(1000) NOT NULL,
+  benefits varchar(1000) NOT NULL,
   item_headline varchar(500) NOT NULL,
   shown varchar(500) NOT NULL,
   style varchar(500) NOT Null,
+  product_details varchar(1000) NOT NULL,
   PRIMARY KEY (ID)
 );
+ 

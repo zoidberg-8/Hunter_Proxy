@@ -9,10 +9,15 @@ let port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use("/shoes/:id", express.static(__dirname + "/../client/dist"));
+
+app.use("/shoes/", express.static(__dirname + "/../client/dist"));
+
 app.use(express.static(__dirname + "/../client/dist"));
 
-app.get("/api/suggestions", (req, res) => {
-  db.getSuggestions(function(err, result) {
+app.get("/shoes/:id/suggestions", (req, res) => {
+  var productid = req.params.id;
+  db.getSuggestions(productid, function(err, result) {
     if (err) {
       console.log(err);
     } else {

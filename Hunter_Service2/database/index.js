@@ -1,21 +1,24 @@
 const mysql = require("mysql");
 const connection = mysql.createConnection({
   user: "root",
-  database: "nike"
+  database: "nike2"
 });
 
-var getSuggestions = function(callback) {
-  connection.query("select * from suggestions", function(err, result) {
-    if (err) {
-      console.log(err);
-    } else {
-      callback(null, result);
+var getDescriptions = function(productid, callback) {
+  connection.query(
+    `select * from description where id = ${productid}`,
+    function(err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        callback(null, result);
+      }
     }
-  });
+  );
 };
 
-var getDescription = function(callback) {
-  connection.query("select * from description", function(err, result) {
+var getSizes = function(productid, callback) {
+  connection.query(`select * from shoe${productid}`, function(err, result) {
     if (err) {
       console.log(err);
     } else {
@@ -25,6 +28,6 @@ var getDescription = function(callback) {
 };
 
 module.exports = {
-  getSuggestions,
-  getDescription
+  getDescriptions,
+  getSizes
 };

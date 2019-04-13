@@ -31,13 +31,13 @@ class ModalDescription extends React.Component {
           </div>
           <div className={styles.shoepreview}>
             <img
-              src="https://c.static-nike.com/a/images/t_default/ccunkpxkr340tgmw8zzb/zoom-pegasus-turbo-mens-running-shoe-qCL9h1.jpg"
+              src="https://s3.amazonaws.com/shoepics2/Screen+Shot+2019-04-13+at+10.36.29+AM.png"
               width="50px"
               height="45px"
             />
             <div className={styles.previewdescription}>
-              <div>Nike Air eos quaerat temporibus</div>
-              <div>$304</div>
+              <div>Nike Air exercitationem</div>
+              <div>$659</div>
             </div>
           </div>
           <div className={styles.modalbody}>

@@ -1,8 +1,10 @@
 import React from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
+import styles from './Form.module.css';
 import $ from 'jquery';
 
+//customStyle for the modal pop-up
 var customStyles ={
   content:{
     width:'55%',
@@ -43,7 +45,10 @@ class InputForm extends React.Component{
       method:'POST',
       body:data
 
-    }).then(()=>this.toggleInputModal()).then(()=>this.props.updatefunction())
+    })
+    .then(()=>this.toggleInputModal())
+    .then(()=>this.props.updatefunction())
+
   }
 
   render(){
@@ -62,16 +67,26 @@ class InputForm extends React.Component{
       <Gridform id='reviewform' onSubmit = {this.handleSubmit} >
 
         <Divcol>
-          <div>Overall Rating</div>
+          <div style={{'padding-top':'4px'}}>Overall Rating</div>
         </Divcol>
 
         <Divtext>
-            <input type = 'radio' name ='rating' value = '1'></input>
-            <input type = 'radio' name ='rating' value = '2'></input>
-            <input type = 'radio' name ='rating' value = '3'></input>
-            <input type = 'radio' name ='rating' value = '4'></input>
-            <input type = 'radio' name ='rating' value = '5'></input>
+          <span className={styles.star}>
 
+
+      <input type="radio" id="rating-5" name="rating" value="5" />
+      <label for="rating-5" >5</label>
+      <input type="radio" id="rating-4" name="rating" value="4"  />
+      <label for="rating-4">4</label>
+      <input type="radio" id="rating-3" name="rating" value="3" />
+      <label for="rating-3">3</label>
+      <input type="radio" id="rating-2" name="rating" value="2" />
+      <label for="rating-2">2</label>
+      <input type="radio" id="rating-1" name="rating" value="1" />
+      <label for="rating-1">1</label>
+      <input type="radio" id="rating-0" name="rating" value="0" className={styles.starcbclear} />
+      <label for="rating-0">0</label>
+      </span>
             </Divtext>
 
 
@@ -246,8 +261,9 @@ color:white;
 border-radius:2px;
 font-size:14px;
 font-family:'Helvetica Neue';
-
 `
+
+
 
 
 

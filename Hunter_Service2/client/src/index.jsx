@@ -27,14 +27,28 @@ class App extends React.Component {
         13,
         14,
         15
-      ]
+      ],
+      newArr: []
     };
   }
   componentDidMount() {
+    var path = window.location.pathname;
+    var prodid = path.slice(7);
+    if (prodid.length < 1) {
+      prodid = "1/";
+    }
     axios
-      .get(`/api/description`)
+      .get(`/shoes/${prodid}description`)
       .then(response => {
         this.setState({ descript: response.data[0] });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    axios
+      .get(`/shoes/${prodid}sizes`)
+      .then(response => {
+        this.setState({ newArr: response.data });
       })
       .catch(error => {
         console.log(error);
@@ -43,7 +57,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Description describes={this.state.descript} size={this.state.sizes} />
+        <Description
+          describes={this.state.descript}
+          size={this.state.sizes}
+          shoeSize={this.state.newArr}
+        />
       </div>
     );
   }

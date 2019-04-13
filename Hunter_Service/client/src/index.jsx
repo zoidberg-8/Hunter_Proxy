@@ -7,13 +7,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      suggest: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-      descript: []
+      suggest: [1,1,1,1,1,1,1,1,1]
     };
   }
   componentDidMount() {
+    var path = window.location.pathname;
+    var prodid = path.slice(7);
+    if (prodid.length < 1) {
+      prodid = "1/";
+    }
     axios
-      .get(`/api/suggestions`)
+      .get(`/shoes/${prodid}suggestions`)
       .then(response => {
         this.setState({ suggest: response.data });
       })

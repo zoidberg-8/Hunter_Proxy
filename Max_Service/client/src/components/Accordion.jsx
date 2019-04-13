@@ -1,14 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import Reviews from './reviews.jsx';
 import ReviewsPreview from './reviewspreview.jsx'
 import ModalAllReviews from './Modal.allreviews.jsx'
 import InputForm from './Modal.writereview.jsx'
 Modal.setAppElement('#reviews')
 import $ from 'jquery';
-
-
 
 class Accordion extends React.Component{
   constructor(props){
@@ -16,13 +13,21 @@ class Accordion extends React.Component{
     this.state = {
       open:false,
       modal:false,
-      reviewsfromdb:[]
+      reviewsfromdb:[],
+      reviewsSet:[],
+      start:0,
+      reviewstoshow:10
     }
     this.toggleOpen = this.toggleOpen.bind(this)
     this.toggleModal = this.toggleModal.bind(this)
     this.updatefunction = this.updatefunction.bind(this)
+    this.createSet = this.createSet.bind(this)
+    this.increaseLimit = this.increaseLimit.bind(this)
   }
 
+  //retrieves all records from database matching product ID
+  //then creates a set of 10 reviews to be shown in 'more reviews'
+  //required because each page of reviews shows only 10 before load more is clicked
   componentDidMount(){
     console.log('componenet mount')
     var path = window.location.pathname
@@ -30,64 +35,108 @@ class Accordion extends React.Component{
     var prodid = path.slice(7)
 
     if (prodid===''){
-      prodid='1/'
+          prodid='1/'
     }
 
     $.ajax({
       url:`/shoes/${prodid}reviews`,
       method:'GET',
-      success:(data)=>{this.setState({
-        reviewsfromdb:data
-      })}
+      success:(data)=>{
+        this.setState({
+        reviewsfromdb:data.reverse()},()=>this.createSet())
+    }
     })
   }
 
   toggleOpen(){
-    console.log(this.state.reviewsfromdb)
     this.setState({
       open: !this.state.open
     })
   }
+
   toggleModal(){
-    console.log('toggle modal')
     this.setState({
       modal: !this.state.modal
     })
   }
 
-  //this function passed into inputform as callback to update reviewsfrom db state after form submission
+  createSet(){
+      var newSet = this.state.reviewsSet
+      var start = this.state.start
+      for (var start; start<this.state.reviewstoshow;start++){
+
+       if(this.state.reviewsfromdb[start]){
+          newSet.push(this.state.reviewsfromdb[start])
+       }
+      }
+
+      this.setState({
+        reviewsSet:newSet
+      },console.log(this.state.reviewsSet))
+  }
+
+  increaseLimit(){
+    var allreviews = this.state.reviewsfromdb
+
+    if(allreviews[this.state.start]){
+
+      var newLimit = this.state.reviewstoshow + 10
+      var newStart = this.state.start +10
+
+      this.setState({
+        reviewstoshow: newLimit,
+        start: newStart
+      }, ()=>this.createSet())
+    }
+
+  }
+
+  //updatefunction passed into <inputform> as callback to update reviewsfromdb state after form submission
   updatefunction(){
+
     var path = window.location.pathname
-    console.log(path.slice(7))
     var prodid = path.slice(7)
 
     $.ajax({
       url:`/shoes/${prodid}reviews`,
       method:'GET',
       success:(data)=>{this.setState({
-        reviewsfromdb:data
-      })}
+        reviewsfromdb:data.reverse()
+      },()=>{var latest = this.state.reviewsfromdb[0]
+        this.state.reviewsSet.shift()
+        var addition = this.state.reviewsSet.unshift(latest)
+        this.setState({
+        reviewSet:addition
+      },()=>console.log(this.state.reviewsSet))
+      })
+    }
     })
-
   }
 
 
   render(){
+
     return(
+
       <div>
         <Button onClick = {this.toggleOpen}>Reviews ({this.state.reviewsfromdb.length})</Button>
 
-          <ReviewContent open = {this.state.open} >
+          <ReviewContent
+            open = {this.state.open} >
 
-          <InputForm updatefunction = {this.updatefunction}/>
+          <InputForm
+            updatefunction = {this.updatefunction}
+            createSet = {this.createSet}/>
 
-          <ReviewsPreview allreviews = {this.state.reviewsfromdb}/>
-
+          <ReviewsPreview
+            allreviews = {this.state.reviewsfromdb}/>
 
           <ModalAllReviews
             allreviews = {this.state.reviewsfromdb}
-          />
-
+            reviewsSet = {this.state.reviewsSet}
+            increaselimit = {this.increaseLimit}
+            createSet = {this.createSet}
+            reset = {this.resetStartEnd}/>
 
         </ReviewContent>
       </div>
@@ -102,7 +151,7 @@ var Button = styled.button`
   color: #444;
   cursor: pointer;
   padding: 18px;
-  width: 500px;
+  width: 100%;
   border: none;
   text-align: left;
   outline: none;

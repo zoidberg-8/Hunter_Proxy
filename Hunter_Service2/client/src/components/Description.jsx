@@ -21,9 +21,10 @@ class Description extends React.Component {
       <div className={styles.describe}>
         <h2>Select Size</h2>
         <div className={styles.size}>
-          {this.props.size.map(data => (
+          {this.props.shoeSize.map(data => (
             <SizeButton
-              data={data}
+              data={data.sizes}
+              grey={data.available}
               bgcolor={this.state.background}
               color={this.state.colour}
               clickedButton={this.clicked.bind(this)}
