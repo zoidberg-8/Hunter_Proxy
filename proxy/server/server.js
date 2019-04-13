@@ -25,12 +25,27 @@ const descriptionProxy = proxy({
   changeOrigin: true
 });
 app.use("/shoes/:id/description", descriptionProxy);
+app.use("/shoes/:id/sizes", descriptionProxy);
 
 const reviewsProxy = proxy({
   target: "http://localhost:7000",
   changeOrigin: true
 });
 app.use("/shoes/:id/reviews", reviewsProxy);
+
+const mainProxy = proxy({
+  target: "httlp://localhost:7018",
+  changelOrigin: true
+});
+app.use("/initial", mainProxy);
+app.use("/api/main", mainProxy);
+
+const initialProxy = proxy({
+  target: "httlp://localhost:7018",
+  changelOrigin: true
+});
+app.use("/initial", initialProxy);
+app.use("/api/main", initialProxy);
 
 app.listen(port, () => {
   console.log(`server running at: http://localhost:${port}`);
