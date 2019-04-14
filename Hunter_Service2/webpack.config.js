@@ -9,7 +9,7 @@ module.exports = {
     filename: "bundle.js"
   },
   resolve: {
-    extensions: [".js", ".jsx",".css"]
+    extensions: [".js", ".jsx", ".css"]
   },
   module: {
     rules: [
@@ -17,7 +17,6 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-react", "@babel/preset-env"],
             plugins: ["@babel/plugin-proposal-class-properties"]
           }
         }

@@ -8,14 +8,15 @@
 
 .picContainer {
   position: relative;
-  display: inline-block;
-  width: calc(100% - 456px);
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
   min-height: 1211px;
   box-sizing: border-box;
 }
 
 .productContainer {
-  position: absolute;
+  position: relative;
   top: 0px;
   display: inline-block;
   width: 456px;

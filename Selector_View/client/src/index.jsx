@@ -52,4 +52,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("selector"));
+ReactDOM.render(<App />, document.getElementById("pic"));

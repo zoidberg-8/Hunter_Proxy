@@ -10,9 +10,9 @@ class IndividualSuggestion extends React.Component {
     return (
       <div className={styles.shoe}>
         <div className={styles.crop}>
-          <a href={`../${Math.floor(Math.random() * 100)}`}>
-            <img src={this.props.data.url} className={styles.pic} />
-          </a>
+          {/* <a href={`../${Math.floor(Math.random() * 100)}`}> */}
+          <img src={this.props.data.url} className={styles.pic} />
+          {/* </a> */}
         </div>
         <p>{this.props.data.colors} colors</p>
         <h3>Nike Air {this.props.data.name}</h3>
